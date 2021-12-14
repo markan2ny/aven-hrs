@@ -19,8 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/user', [App\Http\Controllers\user\UserController::class, 'index'])->name('user');
 
-Route::get('/user', [App\Http\Controllers\User\UserController::class, 'index'])->name('user');
-
-Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/table', [AdminController::class, 'table'])->name('table');
+Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+Route::post('/import', [AdminController::class, 'store'])->name('store');
+
+

@@ -8,20 +8,22 @@
 @endpush
 
 @section('main')
-
-       
   
 <div class="card">
+  @if ( session('status') )
+      <div class="alert alert-success" role="alert">
+        {{ session('status') }}
+      </div>
+  @endif
   <div class="card-header">
     <h3 class="card-title">Import XLS/CSV</h3>
 
-    {{-- <form action="" enctype="multipart/form-data" method="POST">
+    <form action="{{ route('store') }}" enctype="multipart/form-data" method="POST">
       @csrf
+      @method('POST')
       <input type="file" name="import_file">
       <button type="submit" class="btn btn-sm btn-primary">Import</button>
-
-
-    </form> --}}
+    </form>
 
   </div>
   <!-- /.card-header -->

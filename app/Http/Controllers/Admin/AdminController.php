@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Imports\EmployeeImport;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
     public function __construct(){
-
         $this->middleware('role:admin');
 
     }
 
     public function index() {
-
+        // $data = Employee::all();
+        // dd($data);
         return view('admin.dashmain');
         
     }
@@ -25,7 +27,14 @@ class AdminController extends Controller
 
     }
 
-    public function create() {
-        //here
+    public function store(Request $request) {
+        
+        
+        $file = $request->file('import_file');
+        
+        Excel::import(new EmployeeImport, $file);
+
+        return back()->withStatus('Imported!');
+
     }
 }
